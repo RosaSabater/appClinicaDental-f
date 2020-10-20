@@ -1,0 +1,23 @@
+.cajafotos {
+    display: flex !important;
+    justify-content: center !important;
+    background-color: rgb(167, 211, 231);
+    width: 100vw;
+    height: 50vh;
+
+    .foto{
+        height: 60vh;
+
+    }
+}
+
+.site-card-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100vw;
+    height: 30vh;
+
+    .card {
+        height: 20vh !important;
+    }
+}

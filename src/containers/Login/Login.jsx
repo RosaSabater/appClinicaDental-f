@@ -1,3 +1,4 @@
+
 import React from 'react';
 import axios from 'axios'
 import './Login.scss';
@@ -16,15 +17,16 @@ const Login = ({ history }) => {
                 password: event.target.password.value
 
             };
-            let respuesta = await axios.post('http://localhost:3001/areaclientes/login', body)
+            
+            let respuesta = await axios.post('http://localhost:3001/areaclientes/login', body);
 
             let token = respuesta.data.token;
             localStorage.setItem("token", token);
 
-            history.push('/')
+            history.push('/');
 
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
     return (

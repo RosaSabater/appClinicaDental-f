@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Carousel } from 'antd';
-import { Card, Col, Row } from 'antd';
+import { Card, Col} from 'antd';
 import './Home.scss';
 
 class Home extends Component {
@@ -27,26 +27,25 @@ class Home extends Component {
                     </div>
                 </Carousel>
 
+
                 <div className="site-card-wrapper">
-                    <Row gutter={16}>
-                        <Col span={8}>
-                            <Card title="Card title" bordered={false}>
-                                Card content
+                        <Col span={5}>
+                            <Card className="card" title="Tratamientos" bordered={false}>
+                                Tratamientos
                             </Card>
                         </Col>
 
-                        <Col span={8}>
-                            <Card title="Card title" bordered={false}>
-                                Card content
+                        <Col span={5}>
+                            <Card className="card" title="Ortodoncias" bordered={false}>
+                                Ortodoncias
                             </Card>
                         </Col>
                         
-                        <Col span={8}>
-                            <Card title="Card title" bordered={false}>
-                                Card content
+                        <Col span={5}>
+                            <Card className="card" title="Nuestros profesionales" bordered={false}>
+                                Nuestros profesionales
                             </Card>
                         </Col>
-                    </Row>
                 </div>
 
             </>

@@ -1,27 +1,34 @@
 import React from 'react';
 import axios from 'axios'
 import './Logout.scss';
+import { Button } from 'antd';
 
-const Logout = () => {
-    
-    const handleSubmit = event =>{
-        event.preventDefault(); // para evitar refrescar la página
-        const nuevoUsuario ={
+const Logout = ({ history }) => {
 
-            token: event.target.token.value
+    const handleSubmit = async (event) => {
 
-        };
-        axios.get('http://localhost:3001/areaclientes/logout', nuevoUsuario)
-        .then(res=>{
-            console.log(res)
-        })
-        .catch(error=>console.log(error.response.data))
+        try {
+            event.preventDefault(); 
+
+            const body = {
+
+                token: event.target.token.value
+
+            };
+
+            await axios.get('http://localhost:3001/areaclientes/logout', body);
+
+            localStorage.removeItem("token");
+
+            history.push('/');
+
+        } catch (error) {
+            console.log(error);
+        }
     }
     return (
         <form className="logout-form" onSubmit={handleSubmit}>
-
-            <button type="submit">Cerrar sesión</button>
-
+            <Button type="primary" htmlType="submit">Cerrar sesión</Button>
         </form>
     )
 }

@@ -1,12 +1,14 @@
 .header {
-    color: red;
     min-height: 5vh;
+    display: flex;
+    align-items: center;
+    
     a {
         all: unset;
         cursor: pointer;
-        padding: 0.8em;
+        padding: 1em;
         &:hover {
-            background-color: rgb(220, 244, 253);
+            background-color: rgba(220, 244, 253, 0.493);
         }
     }
 }

@@ -1,13 +1,16 @@
-
 import React from 'react';
 import axios from 'axios'
+import { useHistory } from "react-router";
 import './Login.scss';
 import { Button, Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
-const Login = ({ history }) => {
+const Login = ({ setUsuario }) => {
+
+    const history = useHistory();
 
     const handleSubmit = async (event) => {
+
 
         try {
             event.preventDefault(); // para evitar refrescar la página
@@ -17,12 +20,13 @@ const Login = ({ history }) => {
                 password: event.target.password.value
 
             };
-            
+
             let respuesta = await axios.post('http://localhost:3001/areaclientes/login', body);
 
-            let token = respuesta.data.token;
-            localStorage.setItem("token", token);
+            let usuario = respuesta.data
+            localStorage.setItem("usuario", JSON.stringify(usuario));
 
+            setUsuario(usuario)
             history.push('/');
 
         } catch (error) {

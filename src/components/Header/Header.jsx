@@ -3,10 +3,9 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import './Header.scss';
 
-const Header = () => {
-    let token = localStorage.getItem("token");
+const Header = ({usuario}) => {
 
-    if (!token) {
+    if (!usuario) {
         return (
             <header className="header">
                 <Link to="/">Home</Link>

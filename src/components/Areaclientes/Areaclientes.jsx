@@ -4,7 +4,7 @@ import './Areaclientes.scss';
 
 const Areaclientes = () => {
 
-    let token = localStorage.getItem("token");
+    let token = localStorage.getItem("usuario");
 
     if (!token) { return null }
     

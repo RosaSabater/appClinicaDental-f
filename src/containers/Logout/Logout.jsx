@@ -1,23 +1,29 @@
 import React from 'react';
 import axios from 'axios'
+import { useHistory } from "react-router";
 import './Logout.scss';
 import { Button } from 'antd';
 
-const Logout = ({ history }) => {
+const Logout = ({ setUsuario }) => {
+
+    const history = useHistory();
 
     const handleSubmit = async (event) => {
 
         try {
             event.preventDefault(); 
 
+            let usuarioStorage = JSON.parse(localStorage.getItem("usuario"));
+            
             const body = {
-                headers: { Authorization: `${localStorage.getItem('token')}` }
+                headers: { Authorization: `${usuarioStorage.token}` }
             };
 
             await axios.get('http://localhost:3001/areaclientes/logout', body);
 
-            localStorage.removeItem("token");
+            localStorage.removeItem("usuario");
 
+            setUsuario(null)
             history.push('/');
 
         } catch (error) {

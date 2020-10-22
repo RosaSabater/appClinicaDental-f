@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Switch, BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import 'antd/dist/antd.css';
@@ -13,17 +13,20 @@ import Registro from './containers/Registro/Registro';
 import Nuevacita from './containers/Nuevacita/Nuevacita';
 
 function App() {
+
+  const [usuario, setUsuario] = useState(JSON.parse(localStorage.getItem("usuario")));
+
   return (
     <BrowserRouter>
-      <Header />
+      <Header usuario = {usuario}/>
 
       <Switch>
         <Route path='/' component={Home} exact />
         <Route path='/registro' component={Registro} exact />
         <Route path='/areaclientes' component={Areaclientes} exact />
 
-        <Route path='/login' component={Login} exact />
-        <Route path='/areaclientes/logout' component={Logout} exact />
+        <Route path='/login' exact><Login setUsuario={setUsuario}/></Route>
+        <Route path='/areaclientes/logout' exact><Logout setUsuario={setUsuario}/></Route>
         <Route path='/areaclientes/baja' component={Baja} exact />
         <Route path='/areaclientes/nuevacita' component={Nuevacita} exact />
         {/* <Route path='/areaclientes/citas/:id' component={Citas} exact />

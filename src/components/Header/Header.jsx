@@ -1,19 +1,19 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom'
+import { Button } from 'antd';
 import './Header.scss';
 
-const Header = ({usuario}) => {
+const Header = ({ usuario, setShowModalLogin, setShowModalRegister }) => {
 
     if (!usuario) {
         return (
             <header className="header">
                 <Link to="/">Home</Link>
-                <Link to="/registro">Registrarse</Link>
-                <Link to="/login">Acceder</Link>
+                <Button type="link" onClick={()=>setShowModalRegister(true)}>Registrarse</Button>
+                <Button type="link" onClick={()=>setShowModalLogin(true)}>Acceder</Button>
             </header>
         )
-    }else {
+    } else {
         return (
             <header className="header">
                 <Link to="/">Home</Link>

@@ -7,35 +7,52 @@ import Header from './components/Header/Header';
 import Areaclientes from './components/Areaclientes/Areaclientes';
 import Baja from './containers/Baja/Baja';
 import Home from './containers/Home/Home';
-import Login from './containers/Login/Login';
 import Logout from './containers/Logout/Logout';
-import Registro from './containers/Registro/Registro';
 import Nuevacita from './containers/Nuevacita/Nuevacita';
 
 function App() {
 
-  const [usuario, setUsuario] = useState(JSON.parse(localStorage.getItem("usuario")));
+	const [usuario, setUsuario] = useState(JSON.parse(localStorage.getItem("usuario")));
+	const [showModalLogin, setShowModalLogin] = useState(false);
+	const [showModalRegister, setShowModalRegister] = useState(false);
 
-  return (
-    <BrowserRouter>
-      <Header usuario = {usuario}/>
+	return (
+		<BrowserRouter>
+			<Header 
+			usuario={usuario} 
+			setShowModalLogin={setShowModalLogin} 
+			setShowModalRegister={setShowModalRegister} 
+			/>
 
-      <Switch>
-        <Route path='/' component={Home} exact />
-        <Route path='/registro' component={Registro} exact />
-        <Route path='/areaclientes' component={Areaclientes} exact />
+			<Switch>
+				<Route path='/' exact>
+					<Home
+						setUsuario={setUsuario}
+						showModalLogin={showModalLogin}
+						setShowModalLogin={setShowModalLogin}
+						showModalRegister={showModalRegister}
+						setShowModalRegister={setShowModalRegister}
 
-        <Route path='/login' exact><Login setUsuario={setUsuario}/></Route>
-        <Route path='/areaclientes/logout' exact><Logout setUsuario={setUsuario}/></Route>
-        <Route path='/areaclientes/baja' component={Baja} exact />
-        <Route path='/areaclientes/nuevacita' component={Nuevacita} exact />
-        {/* <Route path='/areaclientes/citas/:id' component={Citas} exact />
+					/>
+				</Route>
+
+				{/* <Route path='/registro' component={Registro} exact /> */}
+				<Route path='/areaclientes' component={Areaclientes} exact />
+
+				<Route path='/areaclientes/logout' exact>
+					<Logout setUsuario={setUsuario}
+					/>
+				</Route>
+
+				<Route path='/areaclientes/baja' component={Baja} exact />
+				<Route path='/areaclientes/nuevacita' component={Nuevacita} exact />
+				{/* <Route path='/areaclientes/citas/:id' component={Citas} exact />
         <Route path='/areaclientes/cancelarcita/:id' component={Cancelarcita} exact /> */}
-      </Switch>
+			</Switch>
 
-      <Footer />
-    </BrowserRouter>
-  );
+			<Footer />
+		</BrowserRouter>
+	);
 }
 
 export default App;

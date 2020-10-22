@@ -32,8 +32,8 @@ const Login = ({ history }) => {
     return (
         <div className="padrelogin">
             <form className="login-form" onSubmit={handleSubmit}>
-                <Input type="email" name="email" placeholder="Email" prefix={<UserOutlined />} />
-                <Input.Password name="password" placeholder="input password" />
+                <Input type="email" name="email" size="large" placeholder="Email" prefix={<UserOutlined />} />
+                <Input.Password size="large" name="password" placeholder="Contraseña" />
                 <Button type="primary" htmlType="submit">Iniciar Sesión</Button>
             </form>
         </div>

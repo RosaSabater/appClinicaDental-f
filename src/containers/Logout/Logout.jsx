@@ -11,9 +11,7 @@ const Logout = ({ history }) => {
             event.preventDefault(); 
 
             const body = {
-
-                token: event.target.token.value
-
+                headers: { Authorization: `${localStorage.getItem('token')}` }
             };
 
             await axios.get('http://localhost:3001/areaclientes/logout', body);

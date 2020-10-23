@@ -1,41 +1,41 @@
-import React from 'react';
-import axios from 'axios'
-import './Nuevacita.scss';
-import { DatePicker, Input, Button, notification } from 'antd';
+// import React from 'react';
+// import axios from 'axios'
+// import './Nuevacita.scss';
+// import { DatePicker, Input, Button, notification } from 'antd';
 
-const Nuevacita = ({history}) => {
+// const Nuevacita = ({history}) => {
 
-    const handleSubmit = async (event) => {
+//     const handleSubmit = async (event) => {
 
-        try {
-            event.preventDefault(); 
-            const cita = {
+//         try {
+//             event.preventDefault(); 
+//             const cita = {
 
-                fecha: event.target.fecha.value,
-                usuarioId: event.target.usuario_id.value,
-                motivo: event.target.motivo.value
+//                 fecha: event.target.fecha.value,
+//                 usuarioId: event.target.usuario_id.value,
+//                 motivo: event.target.motivo.value
 
-            };
+//             };
 
-            await axios.post('http://localhost:3001/areaclientes/nuevacita', cita);
+//             await axios.post('http://localhost:3001/areaclientes/nuevacita', cita);
 
-            history.push('/');
+//             history.push('/');
 
-        } catch (error) {
-            console.log(error);
-            notification.error({ message: 'Error al pedir una cita', description: 'Intentenlo de nuevo más tarde.' });
-        }
+//         } catch (error) {
+//             console.log(error);
+//             notification.error({ message: 'Error al pedir una cita', description: 'Intentenlo de nuevo más tarde.' });
+//         }
 
-        return (
-            <form className="nuevacita-form" onSubmit={handleSubmit}>
+//         return (
+//             <form className="nuevacita-form" onSubmit={handleSubmit}>
 
-                <DatePicker type="fecha" name="fecha" style={{ width: '100%' }} />
-                <Input type="motivo" name="motivo" placeholder="Cuéntanos el motivo de tu cita" />
-                <Button type="primary" htmlType="submit">Pedir cita</Button>
+//                 <DatePicker type="fecha" name="fecha" style={{ width: '100%' }} />
+//                 <Input type="motivo" name="motivo" placeholder="Cuéntanos el motivo de tu cita" />
+//                 <Button type="primary" htmlType="submit">Pedir cita</Button>
 
-            </form>
-        )
-    }
-}
+//             </form>
+//         )
+//     }
+// }
 
-export default Nuevacita;
+// export default Nuevacita;

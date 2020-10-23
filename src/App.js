@@ -4,11 +4,11 @@ import './App.css';
 import 'antd/dist/antd.css';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
-import Areaclientes from './components/Areaclientes/Areaclientes';
-import Baja from './containers/Baja/Baja';
 import Home from './containers/Home/Home';
+import Baja from './containers/Baja/Baja';
+import Cita from './containers/Cita/Cita';
 import Logout from './containers/Logout/Logout';
-import Nuevacita from './containers/Nuevacita/Nuevacita';
+// import Nuevacita from './containers/Nuevacita/Nuevacita';
 
 function App() {
 
@@ -18,10 +18,10 @@ function App() {
 
 	return (
 		<BrowserRouter>
-			<Header 
-			usuario={usuario} 
-			setShowModalLogin={setShowModalLogin} 
-			setShowModalRegister={setShowModalRegister} 
+			<Header
+				usuario={usuario}
+				setShowModalLogin={setShowModalLogin}
+				setShowModalRegister={setShowModalRegister}
 			/>
 
 			<Switch>
@@ -37,7 +37,7 @@ function App() {
 				</Route>
 
 				{/* <Route path='/registro' component={Registro} exact /> */}
-				<Route path='/areaclientes' component={Areaclientes} exact />
+
 
 				<Route path='/areaclientes/logout' exact>
 					<Logout setUsuario={setUsuario}
@@ -45,9 +45,12 @@ function App() {
 				</Route>
 
 				<Route path='/areaclientes/baja' component={Baja} exact />
-				<Route path='/areaclientes/nuevacita' component={Nuevacita} exact />
-				{/* <Route path='/areaclientes/citas/:id' component={Citas} exact />
-        <Route path='/areaclientes/cancelarcita/:id' component={Cancelarcita} exact /> */}
+				<Route path='/areaclientes/citas' exact>
+					<Cita usuario={usuario}
+					/>
+				</Route>
+				{/* <Route path='/areaclientes/nuevacita' component={Nuevacita} exact /> */}
+				{/* <Route path='/areaclientes/cancelarcita/:id' component={Cancelarcita} exact /> */}
 			</Switch>
 
 			<Footer />

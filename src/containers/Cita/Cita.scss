@@ -1,0 +1,18 @@
+.ordenarCitas {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-evenly;
+    padding: 2em;
+
+    
+}
+
+.cardCita {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 10vh;
+
+
+    
+}

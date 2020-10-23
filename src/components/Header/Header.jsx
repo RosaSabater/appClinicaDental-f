@@ -5,21 +5,25 @@ import './Header.scss';
 
 const Header = ({ usuario, setShowModalLogin, setShowModalRegister }) => {
 
-    if (!usuario) {
-        return (
-            <header className="header">
+    return (
+        <header className="header">
+            <div>
                 <Link to="/">Home</Link>
-                <Button type="link" onClick={()=>setShowModalRegister(true)}>Registrarse</Button>
-                <Button type="link" onClick={()=>setShowModalLogin(true)}>Acceder</Button>
-            </header>
-        )
-    } else {
-        return (
-            <header className="header">
-                <Link to="/">Home</Link>
-                <Link to="/areaclientes">Area clientes</Link>
-            </header>
-        )
-    }
+                {!usuario && <>
+                    <Button type="link" onClick={() => setShowModalRegister(true)}>Registrarse</Button>
+                    <Button type="link" onClick={() => setShowModalLogin(true)}>Acceder</Button>
+                </>}
+                {usuario && <Link to="/areaclientes/citas">Area clientes</Link>}
+            </div>
+
+            { usuario && <div>
+                <Link to="/areaclientes/nuevacita">Pedir Cita</Link>
+                <Link to="/areaclientes/logout">Logout</Link>
+                <Link to="/areaclientes/baja">Eliminar Cuenta</Link>
+            </div>}
+
+        </header>
+    );
+
 }
 export default Header;

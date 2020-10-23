@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Card, Col, Carousel, Modal, Button, Input } from 'antd';
+import { Card, Col, Carousel, Modal, Button, Input, notification } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import './Home.scss';
 
@@ -26,11 +26,14 @@ const Home = ({ showModalRegister, setShowModalRegister, showModalLogin, setShow
             let usuario = respuesta.data
             localStorage.setItem("usuario", JSON.stringify(usuario));
 
+            notification.success({ message: '¡Bienvenido!', description: 'Has iniciado sesión con éxito' });
+
             setUsuario(usuario)
             setShowModalLogin(false)
 
         } catch (error) {
             console.log(error);
+            notification.error({ message: 'Error en el registro', description: 'Hubo un error al tratar de registrar al usuario, revisa tus campos' });
         }
     };
 
@@ -51,10 +54,13 @@ const Home = ({ showModalRegister, setShowModalRegister, showModalLogin, setShow
 
             await axios.post('http://localhost:3001/registro/', body);
 
-            setShowModalLogin(false)
+            notification.success({ message: 'Usuario registrado', description: 'Usuario registrado con éxito' });
+
+            setShowModalRegister(false)
 
         } catch (error) {
             console.log(error);
+            notification.error({ message: 'Error en el registro', description: 'Hubo un error al tratar de registrar al usuario, revisa tus campos' });
         }
 
     }
@@ -107,11 +113,11 @@ const Home = ({ showModalRegister, setShowModalRegister, showModalLogin, setShow
                 footer={null}
 
             >
-                    <form className="login-form" onSubmit={handleSubmitLogin}>
-                        <Input type="email" name="email" size="large" placeholder="Email" prefix={<UserOutlined />} />
-                        <Input.Password size="large" name="password" placeholder="Contraseña" />
-                        <Button type="primary" htmlType="submit">Iniciar Sesión</Button>
-                    </form>
+                <form className="login-form" onSubmit={handleSubmitLogin}>
+                    <Input type="email" name="email" size="large" required placeholder="Email" prefix={<UserOutlined />} />
+                    <Input.Password size="large" name="password" required placeholder="Contraseña" />
+                    <Button type="primary" htmlType="submit">Iniciar Sesión</Button>
+                </form>
             </Modal>
 
 

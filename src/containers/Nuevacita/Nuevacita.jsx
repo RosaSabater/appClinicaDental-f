@@ -1,34 +1,41 @@
 import React from 'react';
 import axios from 'axios'
 import './Nuevacita.scss';
-import {DatePicker, Input, Button } from 'antd';
+import { DatePicker, Input, Button, notification } from 'antd';
 
-const Nuevacita = () => {
+const Nuevacita = ({history}) => {
 
-    const handleSubmit = event => {
-        event.preventDefault(); // para evitar refrescar la página
-        const cita = {
+    const handleSubmit = async (event) => {
 
-            fecha: event.target.fecha.value,
-            usuarioId: event.target.usuarioId.value,
-            motivo: event.target.motivo.value
+        try {
+            event.preventDefault(); 
+            const cita = {
 
-        };
-        axios.post('http://localhost:3001/areaclientes/nuevacita', cita)
-            .then(res => {
-                console.log(res)
-            })
-            .catch(error => console.log(error.response.data))
+                fecha: event.target.fecha.value,
+                usuarioId: event.target.usuario_id.value,
+                motivo: event.target.motivo.value
+
+            };
+
+            await axios.post('http://localhost:3001/areaclientes/nuevacita', cita);
+
+            history.push('/');
+
+        } catch (error) {
+            console.log(error);
+            notification.error({ message: 'Error al pedir una cita', description: 'Intentenlo de nuevo más tarde.' });
+        }
+
+        return (
+            <form className="nuevacita-form" onSubmit={handleSubmit}>
+
+                <DatePicker type="fecha" name="fecha" style={{ width: '100%' }} />
+                <Input type="motivo" name="motivo" placeholder="Cuéntanos el motivo de tu cita" />
+                <Button type="primary" htmlType="submit">Pedir cita</Button>
+
+            </form>
+        )
     }
-    return (
-        <form className="nuevacita-form" onSubmit={handleSubmit}>
-
-            <DatePicker type="fecha" name="fecha" style={{ width: '100%' }} />
-            <Input type="motivo" name="motivo" required placeholder="Cuéntanos el motivo de tu cita" />
-            <Button type="primary" htmlType="submit">Registrarse</Button>
-
-        </form>
-    )
 }
 
 export default Nuevacita;

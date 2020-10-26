@@ -3,6 +3,7 @@
     flex-direction: row !important;
     justify-content: space-evenly;
     padding: 2em;
+    flex-wrap: wrap;
 
     
 }
@@ -12,7 +13,5 @@
     flex-direction: column;
     justify-content: space-evenly;
     height: 10vh;
-
-
     
 }

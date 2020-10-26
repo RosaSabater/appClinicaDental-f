@@ -5,16 +5,15 @@ import 'antd/dist/antd.css';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Home from './containers/Home/Home';
-import Baja from './containers/Baja/Baja';
 import Cita from './containers/Cita/Cita';
 import Logout from './containers/Logout/Logout';
-// import Nuevacita from './containers/Nuevacita/Nuevacita';
 
 function App() {
 
 	const [usuario, setUsuario] = useState(JSON.parse(localStorage.getItem("usuario")));
 	const [showModalLogin, setShowModalLogin] = useState(false);
 	const [showModalRegister, setShowModalRegister] = useState(false);
+	const [showModalCita, setShowModalCita] = useState(false);
 
 	return (
 		<BrowserRouter>
@@ -41,12 +40,13 @@ function App() {
 					/>
 				</Route>
 
-				<Route path='/areaclientes/baja' component={Baja} exact />
 				<Route path='/areaclientes/citas' exact>
-					<Cita usuario={usuario}
+					<Cita 
+						usuario={usuario}
+						showModalCita={showModalCita}
+						setShowModalCita={setShowModalCita}
 					/>
 				</Route>
-				{/* <Route path='/areaclientes/nuevacita' component={Nuevacita} exact /> */}
 			</Switch>
 
 			<Footer />

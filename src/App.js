@@ -36,9 +36,6 @@ function App() {
 					/>
 				</Route>
 
-				{/* <Route path='/registro' component={Registro} exact /> */}
-
-
 				<Route path='/areaclientes/logout' exact>
 					<Logout setUsuario={setUsuario}
 					/>
@@ -50,7 +47,6 @@ function App() {
 					/>
 				</Route>
 				{/* <Route path='/areaclientes/nuevacita' component={Nuevacita} exact /> */}
-				{/* <Route path='/areaclientes/cancelarcita/:id' component={Cancelarcita} exact /> */}
 			</Switch>
 
 			<Footer />

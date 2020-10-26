@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Card } from 'antd';
+import { Card, notification } from 'antd';
 import './Cita.scss';
 
 const Cita = ({ usuario }) => {
@@ -16,7 +16,7 @@ const Cita = ({ usuario }) => {
                     headers: { Authorization: usuario.token }
                 };
 
-                let respuesta = await axios.get(`http://localhost:3001/areaclientes/citas/${usuario._id}`, header)
+                let respuesta = await axios.get(`http://localhost:3001/areaclientes/citas/${usuario._id}`, header);
 
                 setCitas(respuesta.data);
 
@@ -33,33 +33,64 @@ const Cita = ({ usuario }) => {
 
         try {
 
-            let respuesta = await axios.put(`http://localhost:3001/areaclientes/cancelarcita/${citaId}`)
-            console.log(respuesta)
+            const header = {
+                headers: { Authorization: usuario.token }
+            };
+
+            await axios.put(`http://localhost:3001/areaclientes/cancelarcita/${citaId}`, null, header);
+
+            //busco dentro de las citas la que acabo de anular
+            
+            let citasActualizadas = citas.map(cita => {
+                if (citaId === cita._id) {
+                    cita.estado = 'cancelada';
+                    return cita;
+                } else {
+                    return cita
+                }
+            });
+
+            //cambio el estado para que se re renderice
+            setCitas(citasActualizadas);
+
         } catch (error) {
-            console.log(error);
+            console.log(error.response.data.message);
+            notification.error({ message: 'Ha ocurrido un error', description: error.response.data.message });
         }
-        
+
     }
+
 
     return (
         <div className="ordenarCitas">
-            {citas.map(cita =>
+            {citas.map(cita => {
 
-                <Card
-                    className="cardCitasGrande"
-                    title={`Cita ${cita.estado}`}
-                    extra= {new Date(cita.fecha) >= new Date() ? <a onClick={() => anularCita(cita._id)} href="#">Anular cita</a> : null}
-                    style={{ width: 300 }}
-                >
+                let extra = null;
 
-                    <div className="cardCita"
-                        key={cita._id}
+                // si la cita está en el futuro y está pendiente se muestra "Anular"
+                if (
+                    new Date(cita.fecha) >= new Date() && cita.estado === "pendiente") {
+                    extra = <a onClick={() => anularCita(cita._id)} href="#">Anular cita</a>
+                }
+
+                return (
+                    <Card
+                        className="cardCitasGrande"
+                        title={`Cita ${cita.estado}`}
+                        extra={extra}
+                        style={{ width: 300 }}
                     >
-                        <p>{cita.motivo}</p>
-                        <p>{new Date(cita.fecha).toLocaleString()}</p>
-                    </div>
 
-                </Card>
+                        <div className="cardCita"
+                            key={cita._id}
+                        >
+                            <p>{cita.motivo}</p>
+                            <p>{new Date(cita.fecha).toLocaleString()}</p>
+                        </div>
+
+                    </Card>
+                )
+            }
             )}
         </div>
     );

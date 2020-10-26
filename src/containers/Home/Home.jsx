@@ -32,8 +32,8 @@ const Home = ({ showModalRegister, setShowModalRegister, showModalLogin, setShow
             setShowModalLogin(false)
 
         } catch (error) {
-            console.log(error);
-            notification.error({ message: 'Error en el registro', description: 'Hubo un error al tratar de registrar al usuario, revisa tus campos' });
+            console.log(error.response.data.message);
+            notification.error({ message: 'Ha ocurrido un error', description: error.response.data.message });
         }
     };
 
@@ -59,8 +59,9 @@ const Home = ({ showModalRegister, setShowModalRegister, showModalLogin, setShow
             setShowModalRegister(false)
 
         } catch (error) {
-            console.log(error);
-            notification.error({ message: 'Error en el registro', description: 'Hubo un error al tratar de registrar al usuario, revisa tus campos' });
+            console.log(error.response.data.message);
+            let values = Object.values(error.response.data)
+            notification.error({ message: 'Ha ocurrido un error', description: values.join(", ") });
         }
 
     }

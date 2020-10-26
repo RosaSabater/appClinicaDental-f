@@ -19,7 +19,7 @@ const Logout = ({ setUsuario }) => {
                 headers: { Authorization: `${usuarioStorage.token}` }
             };
 
-            await axios.get('http://localhost:3001/areaclientes/logout', body);
+            await axios.get(`${process.env.REACT_APP_APIURL}/areaclientes/logout`, body);
 
             localStorage.removeItem("usuario");
 

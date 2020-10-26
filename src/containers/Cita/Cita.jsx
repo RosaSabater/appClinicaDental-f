@@ -16,7 +16,7 @@ const Cita = ({ usuario, showModalCita, setShowModalCita }) => {
                     headers: { Authorization: usuario.token }
                 };
 
-                let respuesta = await axios.get(`http://localhost:3001/areaclientes/citas/${usuario._id}`, header);
+                let respuesta = await axios.get(`${process.env.REACT_APP_APIURL}/areaclientes/citas/${usuario._id}`, header);
 
                 setCitas(respuesta.data);
 
@@ -37,7 +37,7 @@ const Cita = ({ usuario, showModalCita, setShowModalCita }) => {
                 headers: { Authorization: usuario.token }
             };
 
-            await axios.put(`http://localhost:3001/areaclientes/cancelarcita/${citaId}`, null, header);
+            await axios.put(`${process.env.REACT_APP_APIURL}/areaclientes/cancelarcita/${citaId}`, null, header);
 
             //busco dentro de las citas la que acabo de anular
 
@@ -78,7 +78,7 @@ const Cita = ({ usuario, showModalCita, setShowModalCita }) => {
 
             };
 
-            let respuesta = await axios.post('http://localhost:3001/areaclientes/nuevacita', cita, header);
+            let respuesta = await axios.post(`${process.env.REACT_APP_APIURL}/areaclientes/nuevacita`, cita, header);
 
 
             let citasClone = [...citas]; // clono citas

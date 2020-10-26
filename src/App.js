@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Switch, BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import 'antd/dist/antd.css';
-import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Home from './containers/Home/Home';
 import Cita from './containers/Cita/Cita';
@@ -48,8 +47,6 @@ function App() {
 					/>
 				</Route>
 			</Switch>
-
-			<Footer />
 		</BrowserRouter>
 	);
 }

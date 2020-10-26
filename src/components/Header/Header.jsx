@@ -17,8 +17,7 @@ const Header = ({ usuario, setShowModalLogin, setShowModalRegister }) => {
             </div>
 
             { usuario && <div>
-                <Link to="/areaclientes/nuevacita">Pedir Cita</Link>
-                <Link to="/areaclientes/logout">Logout</Link>
+                <Link to="/areaclientes/logout">Cerrar sesión</Link>
             </div>}
 
         </header>

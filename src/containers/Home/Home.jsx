@@ -21,7 +21,7 @@ const Home = ({ showModalRegister, setShowModalRegister, showModalLogin, setShow
 
             };
 
-            let respuesta = await axios.post('http://localhost:3001/areaclientes/login', body);
+            let respuesta = await axios.post(`${process.env.REACT_APP_APIURL}/areaclientes/login`, body);
 
             let usuario = respuesta.data
             localStorage.setItem("usuario", JSON.stringify(usuario));
@@ -52,7 +52,7 @@ const Home = ({ showModalRegister, setShowModalRegister, showModalLogin, setShow
 
             };
 
-            await axios.post('http://localhost:3001/registro/', body);
+            await axios.post(`${process.env.REACT_APP_APIURL}/registro/`, body);
 
             notification.success({ message: 'Usuario registrado', description: 'Usuario registrado con éxito' });
 

@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Switch, BrowserRouter, Route } from 'react-router-dom'
-import './App.css';
 import 'antd/dist/antd.css';
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import './App.css';
 import Header from './components/Header/Header';
-import Home from './containers/Home/Home';
+import AdminCitas from './containers/AdminCitas/AdminCitas';
+import AdminCliente from './containers/AdminCliente/AdminCliente';
 import Cita from './containers/Cita/Cita';
-import Logout from './containers/Logout/Logout';
+import Home from './containers/Home/Home';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
 				usuario={usuario}
 				setShowModalLogin={setShowModalLogin}
 				setShowModalRegister={setShowModalRegister}
+				setUsuario={setUsuario}
 			/>
 
 			<Switch>
@@ -30,20 +32,26 @@ function App() {
 						setShowModalLogin={setShowModalLogin}
 						showModalRegister={showModalRegister}
 						setShowModalRegister={setShowModalRegister}
-
-					/>
-				</Route>
-
-				<Route path='/areaclientes/logout' exact>
-					<Logout setUsuario={setUsuario}
 					/>
 				</Route>
 
 				<Route path='/areaclientes/citas' exact>
-					<Cita 
+					<Cita
 						usuario={usuario}
 						showModalCita={showModalCita}
 						setShowModalCita={setShowModalCita}
+					/>
+				</Route>
+				<Route path='/admin/mostrarCitas' exact>
+					<AdminCitas
+						usuario={usuario}
+						showModalCita={showModalCita}
+						setShowModalCita={setShowModalCita}
+					/>
+				</Route>
+				<Route path='/admin/mostrarUsuarios' exact>
+					<AdminCliente
+						usuario={usuario}
 					/>
 				</Route>
 			</Switch>

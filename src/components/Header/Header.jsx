@@ -1,9 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-import { Button } from 'antd';
+import { Link, useHistory } from 'react-router-dom'
+import { Button, notification } from 'antd';
+import axios from 'axios';
 import './Header.scss';
 
-const Header = ({ usuario, setShowModalLogin, setShowModalRegister }) => {
+const Header = ({ usuario, setUsuario, setShowModalLogin, setShowModalRegister }) => {
+
+    const esAdmin = usuario?.rol === 'admin';
+
+    const history = useHistory();
+
+    const logout = async (event) => {
+
+        try {
+            const body = {
+                headers: { Authorization: `${usuario?.token}` }
+            };
+
+            localStorage.removeItem("usuario");
+            
+            setUsuario(null)
+            
+            history.push('/');
+            
+            await axios.get(`${process.env.REACT_APP_APIURL}/areaclientes/logout`, body);
+
+        } catch (error) {
+            console.log(error);
+            notification.error({ message: 'Error al cerrar sesión', description: 'Intentenlo de nuevo más tarde.' });
+        }
+    };
 
     return (
         <header className="header">
@@ -17,7 +43,13 @@ const Header = ({ usuario, setShowModalLogin, setShowModalRegister }) => {
             </div>
 
             { usuario && <div>
-                <Link to="/areaclientes/logout">Cerrar sesión</Link>
+                <Button type="link" onClick={logout}>Cerrar sesión</Button>
+            </div>}
+            { esAdmin && <div>
+                <Link to="/admin/mostrarUsuarios">Clientes</Link>
+            </div>}
+            { esAdmin && <div>
+                <Link to="/admin/mostrarCitas">Citas concertadas</Link>
             </div>}
 
         </header>

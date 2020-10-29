@@ -2,38 +2,34 @@ import React from 'react';
 import axios from 'axios'
 import { useHistory } from "react-router";
 import './Logout.scss';
-import { Button } from 'antd';
+import { Button, notification } from 'antd';
 
-const Logout = ({ setUsuario }) => {
+const Logout = ({ setUsuario, usuario }) => {
 
     const history = useHistory();
 
     const handleSubmit = async (event) => {
 
         try {
-            event.preventDefault(); 
-
-            let usuarioStorage = JSON.parse(localStorage.getItem("usuario"));
-            
             const body = {
-                headers: { Authorization: `${usuarioStorage.token}` }
+                headers: { Authorization: `${usuario?.token}` }
             };
 
-            await axios.get(`${process.env.REACT_APP_APIURL}/areaclientes/logout`, body);
-
             localStorage.removeItem("usuario");
-
+            
             setUsuario(null)
+            
             history.push('/');
+            
+            await axios.get(`${process.env.REACT_APP_APIURL}/areaclientes/logout`, body);
 
         } catch (error) {
             console.log(error);
+            notification.error({ message: 'Error al cerrar sesión', description: 'Intentenlo de nuevo más tarde.' });
         }
     }
     return (
-        <form className="logout-form" onSubmit={handleSubmit}>
-            <Button type="primary" htmlType="submit">Cerrar sesión</Button>
-        </form>
+        <Button type="primary" htmlType="submit" onClick={handleSubmit}>Cerrar sesión</Button>
     )
 }
 

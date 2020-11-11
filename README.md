@@ -4,7 +4,7 @@
 Es una aplicación web para una clínica dental que usa:
 
 - Frontend: 🧧 ReactJS
-- Backend: 🔸 NodeJS + Express + Mongoose + JWT + Validame(Regex) + BcryptJS + REST Clients
+- Backend: 🔸 NodeJS + Express + Mongoose + JWT + Validame(Regex) + BcryptJS + REST Client
 - DB: 🍃 MongoDB 
 
 

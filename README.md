@@ -26,7 +26,7 @@ Es una aplicación web para una clínica dental que usa:
 # Deploy ☁
 
 - El backend está deployado en [Heroku](https://appclinicadental-b.herokuapp.com/).
-- El frontend está deployado en [Netlify](https://clinicadental.netlify.app/s).
+- El frontend está deployado en [Netlify](https://clinicadental.netlify.app).
 
 <br>
 

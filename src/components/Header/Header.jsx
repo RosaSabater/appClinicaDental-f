@@ -18,11 +18,11 @@ const Header = ({ usuario, setUsuario, setShowModalLogin, setShowModalRegister }
             };
 
             localStorage.removeItem("usuario");
-            
+
             setUsuario(null)
-            
+
             history.push('/');
-            
+
             await axios.get(`${process.env.REACT_APP_APIURL}/areaclientes/logout`, body);
 
         } catch (error) {
@@ -42,16 +42,17 @@ const Header = ({ usuario, setUsuario, setShowModalLogin, setShowModalRegister }
                 {usuario && <Link to="/areaclientes/citas">Area clientes</Link>}
             </div>
 
-            { usuario && <div>
-                <Button type="link" onClick={logout}>Cerrar sesión</Button>
-            </div>}
-            { esAdmin && <div>
-                <Link to="/admin/mostrarUsuarios">Clientes</Link>
-            </div>}
-            { esAdmin && <div>
-                <Link to="/admin/mostrarCitas">Citas concertadas</Link>
-            </div>}
-
+            <div className="menuDer">
+                {usuario && <div>
+                    <Button type="link" onClick={logout}>Cerrar sesión</Button>
+                </div>}
+                {esAdmin && <div>
+                    <Link to="/admin/mostrarUsuarios">Clientes</Link>
+                </div>}
+                {esAdmin && <div>
+                    <Link to="/admin/mostrarCitas">Citas concertadas</Link>
+                </div>}
+            </div>
         </header>
     );
 

@@ -46,9 +46,10 @@ const AdminCitas = ({ usuario }) => {
                                 key={cita._id}
                             >
                                 <p>{cita.motivo}</p>
-                                <p>Nombre: {cita.datosUsuario[0].nombre}</p>
-                                <p>Apellidos: {cita.datosUsuario[0].apellidos}</p>
-                                <p>Teléfono: {cita.datosUsuario[0].telefono}</p>
+
+                                <p>Nombre: {cita.datosUsuario[0]?.nombre}</p>
+                                <p>Apellidos: {cita.datosUsuario[0]?.apellidos}</p>
+                                <p>Teléfono: {cita.datosUsuario[0]?.telefono}</p> 
                                 <p>{new Date(cita.fecha).toLocaleString()}</p>
                             </div>
 

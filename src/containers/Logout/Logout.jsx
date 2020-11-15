@@ -14,7 +14,7 @@ const Logout = ({ setUsuario, usuario }) => {
             const body = {
                 headers: { Authorization: `${usuario?.token}` }
             };
-
+            console.log('afasd')
             localStorage.removeItem("usuario");
             
             setUsuario(null)
